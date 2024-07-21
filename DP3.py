@@ -11,7 +11,7 @@ import numpy as np
 # Operations are: 'download' (download only) or 'benchmark' (the default).
 
 def download():
-    result=os.system('https://lofar-surveys.org/public/uksrc-test-data/meerkat_averaged_data.tar')
+    result=os.system('wget https://lofar-surveys.org/public/uksrc-test-data/meerkat_averaged_data.tar')
     if result!=0:
         raise RuntimeError('Download failed!')
     result=os.system('tar xvf test.tar')
