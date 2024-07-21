@@ -35,7 +35,17 @@ The outputs are timings of the runs of the benchmarks, printed to the screen dur
 
 * Clone the repo
 * Build the singularity image, e.g. `sudo singularity build benchmark.sif benchmark.singularity`
-* Choose a directory to work in corresponding to the file system to be assessed, here `/data` will be used as an example
+* Choose a directory to work in corresponding to the file system to be assessed; here `/data` will be used as an example
 * Download the required dataset for one of the runs into this directory, making sure it's bound into the singularity, e.g. `singularity exec -B/data benchmark.sif images.py /data download`
 * Optionally, and if you can, drop the kernel file system cache: `sudo "sync && echo 3 > /proc/sys/vm/drop_caches"`
 * Now run the benchmark:  `singularity exec -B/data benchmark.sif images.py /data`
+
+## Container compatibility
+
+The code uses singularity to allow portability to HPC.
+
+## Hardware requirements
+
+Each benchmark will be affected by CPU speed and memory bandwidth to some extent, so generally the faster these are, the more you will be testing the underlying storage. The catalogue test is at least partly CPU-bound due to the cost of translating the FITS catalogue structures to Python data structures.
+
+The test file system should have a minimum of 100 GB of capacity for the largest test, `DP3.py`.
