@@ -21,9 +21,11 @@ The software was developed by Martin Hardcastle mjh@extragalactic.info . The sin
 ## Component details:
 
 * `benchmark.singularity`: a singularity recipe for the container
-* `DP3.py`: DP3 benchmark (uv data)
-* `images.py`: image-based benchmark
-* `catalogues.py`: catalogue-based benchmark (note: may be CPU-bound)
+* `DP3.py`: DP3 benchmark (uv data). Averages a visibility dataset with DP3.
+* `images.py`: image-based benchmark. Stacks a number of images with astropy. Writes out the result.
+* `catalogues.py`: catalogue-based benchmark (note: may be CPU-bound). Reads in a large catalogue, adds a column, and writes it out.
+
+Each workflow runs five times and reports the mean, maximum and standard deviation of the execution time.
 
 ## Files needed
 
@@ -37,7 +39,7 @@ The outputs are timings of the runs of the benchmarks, printed to the screen dur
 * Build the singularity image, e.g. `sudo singularity build benchmark.sif benchmark.singularity`
 * Choose a directory to work in corresponding to the file system to be assessed; here `/data` will be used as an example
 * Download the required dataset for one of the runs into this directory, making sure it's bound into the singularity, e.g. `singularity exec -B/data benchmark.sif images.py /data download`
-* Optionally, and if you can, drop the kernel file system cache: `sudo "sync && echo 3 > /proc/sys/vm/drop_caches"`
+* Optionally, and if you can, drop the kernel file system cache: `sudo bash -c "sync && echo 3 > /proc/sys/vm/drop_caches"`. In cases where the system you are working on can cache the target images in RAM, not doing this will basically cause the benchmark to test memory bandwidth.
 * Now run the benchmark:  `singularity exec -B/data benchmark.sif images.py /data`
 
 ## Container compatibility
@@ -49,3 +51,5 @@ The code uses singularity to allow portability to HPC.
 Each benchmark will be affected by CPU speed and memory bandwidth to some extent, so generally the faster these are, the more you will be testing the underlying storage. The catalogue test is at least partly CPU-bound due to the cost of translating the FITS catalogue structures to Python data structures.
 
 The test file system should have a minimum of 100 GB of capacity for the largest test, `DP3.py`.
+
+A minimum of ~16 GB RAM is required for `catalogues.py` .
