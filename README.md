@@ -31,7 +31,7 @@ Each workflow runs five times and reports the mean, maximum and standard deviati
 
 The codes all download the datasets they need before or optionally during the tests.
 
-The outputs are timings of the runs of the benchmarks, printed to the screen during the run.
+The outputs are timings of the runs of the benchmarks, printed to the screen during the run. If cacheing is relevant to performance, then the maximum run time is likely to be the one that is of most interest. (Note that on distributed file systems cacheing not just on the host system but on the servers will affect the runtime.)
 
 ## How to run
 
