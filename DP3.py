@@ -14,7 +14,7 @@ def download():
     result=os.system('wget https://lofar-surveys.org/public/uksrc-test-data/meerkat_averaged_data.tar')
     if result!=0:
         raise RuntimeError('Download failed!')
-    result=os.system('tar xvf test.tar')
+    result=os.system('tar xvf meerkat_averaged_data.tar')
     if result!=0:
         raise RuntimeError('Untar failed!')
     
