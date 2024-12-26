@@ -80,6 +80,8 @@ apt-get install -y emacs htop nano mc \
     python3-venv \
     bzip2 \
     ipython3 \
+    s3fs \
+    awscli \
     libgsl-dev \
     libgtkmm-3.0-dev \
     libcfitsio-bin libxml2-dev libarmadillo-dev libsigc++-2.0-dev liblua5.3-dev libxslt-dev tcl zip libbz2-dev
